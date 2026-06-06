@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#0B0B0B;--gold:#C9A84C;--gold-light:#E4C97A;--white:#FFFFFF;--gray:#999;--gray-light:#CCC;--card-bg:#111111}
+body{background:var(--black);color:var(--white);font-family:'Montserrat',sans-serif;overflow-x:hidden}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+
+#navbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.4rem 3rem;background:rgba(11,11,11,0.3);backdrop-filter:blur(4px);border-bottom:1px solid transparent;transition:all 0.4s ease}
+#navbar.scrolled{background:rgba(11,11,11,0.98);border-bottom-color:rgba(201,168,76,0.15);padding:1rem 3rem;box-shadow:0 4px 40px rgba(0,0,0,0.6)}
+.logo-wrap{display:flex;align-items:center;gap:14px;cursor:pointer;text-decoration:none}
+.logo-name{font-family:'Cinzel',serif;font-size:15px;font-weight:700;letter-spacing:0.35em;color:var(--white)}
+.logo-sub{font-family:'Montserrat',sans-serif;font-size:8px;font-weight:300;letter-spacing:0.3em;color:var(--gold);margin-top:2px}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.2em;color:var(--gray-light);text-decoration:none;text-transform:uppercase;position:relative;padding-bottom:4px;transition:color 0.3s}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width 0.35s ease}
+.nav-links a:hover{color:var(--white)}
+.nav-links a:hover::after{width:100%}
+.nav-icons{display:flex;align-items:center;gap:1.4rem}
+.nav-icon-btn{background:none;border:none;color:var(--gray-light);cursor:pointer;position:relative;transition:color 0.3s;padding:4px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:400}
+.nav-icon-btn:hover{color:var(--gold)}
+.cart-badge{position:absolute;top:-4px;right:-6px;background:var(--gold);color:var(--black);font-size:8px;font-weight:700;width:15px;height:15px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+
+#hero{height:100vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-img{position:absolute;inset:0;background:url('') center/cover no-repeat}
+.hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(11,11,11,0.92) 0%,rgba(11,11,11,0.6) 50%,rgba(11,11,11,0.3) 100%)}
+.hero-content{position:relative;z-index:5;padding:0 3rem;max-width:620px;align-self:center;margin-top:0}
+.hero-tag{font-size:9px;letter-spacing:0.5em;color:var(--gold);text-transform:uppercase;font-weight:500;opacity:0;animation:fadeUp 0.8s ease 0.5s forwards;display:block}
+.hero-title-1{font-family:'Cinzel',serif;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:400;color:var(--white);line-height:1.2;margin-top:1rem;opacity:0;animation:fadeUp 0.9s ease 0.9s forwards}
+.hero-title-2{font-family:'Cinzel',serif;font-size:clamp(1rem,1.8vw,1.4rem);font-weight:400;color:var(--gold);letter-spacing:0.15em;margin-top:0.8rem;opacity:0;animation:fadeUp 0.9s ease 1.3s forwards;font-style:italic}
+.hero-line{width:50px;height:1px;background:var(--gold);margin:1.8rem 0;opacity:0;animation:fadeUp 0.6s ease 1.6s forwards}
+.hero-desc{font-size:12px;letter-spacing:0.08em;color:var(--gray);line-height:1.9;max-width:360px;opacity:0;animation:fadeUp 0.8s ease 1.9s forwards;font-weight:300}
+.hero-cta-wrap{margin-top:2.5rem;opacity:0;animation:fadeUp 0.8s ease 2.2s forwards;display:flex;gap:1.2rem;align-items:center}
+.btn-gold-outline{padding:13px 36px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;cursor:pointer;transition:all 0.45s ease;font-weight:500}
+.btn-gold-outline:hover{background:var(--gold);color:var(--black)}
+.btn-ghost{padding:13px 24px;border:none;background:none;color:var(--gray);font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:color 0.3s}
+.btn-ghost:hover{color:var(--white)}
+.scroll-indicator{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 1s ease 3s forwards;cursor:pointer}
+.scroll-line{width:1px;height:60px;background:rgba(201,168,76,0.3);position:relative;overflow:hidden}
+.scroll-line-inner{position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--gold);animation:scrollAnim 2s ease 3.5s infinite}
+.scroll-text{font-size:8px;letter-spacing:0.35em;color:var(--gray);text-transform:uppercase;margin-top:6px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scrollAnim{0%{top:-100%}100%{top:100%}}
+
+.section{padding:7rem 3rem}
+.section-header{text-align:center;margin-bottom:4.5rem}
+.section-eyebrow{font-size:9px;letter-spacing:0.5em;color:var(--gold);text-transform:uppercase;font-weight:500;display:block;margin-bottom:1rem}
+.section-title{font-family:'Cinzel',serif;font-size:clamp(1.8rem,3vw,2.5rem);font-weight:400;color:var(--white);line-height:1.3}
+.section-rule{width:40px;height:1px;background:var(--gold);margin:1.5rem auto 0}
+
+#categories{background:var(--black)}
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.cat-card{position:relative;aspect-ratio:3/4;overflow:hidden;cursor:pointer}
+.cat-card-bg{position:absolute;inset:0;transition:transform 0.9s cubic-bezier(0.25,0.46,0.45,0.94);background-size:cover;background-position:center}
+.cat-card:hover .cat-card-bg{transform:scale(1.08)}
+.cat-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.25) 55%,rgba(0,0,0,0.1) 100%);transition:opacity 0.4s}
+.cat-card:hover .cat-overlay{opacity:0.85}
+.cat-content{position:absolute;bottom:0;left:0;right:0;padding:2rem 1.8rem;transform:translateY(6px);transition:transform 0.4s ease}
+.cat-card:hover .cat-content{transform:translateY(-4px)}
+.cat-label{font-size:9px;letter-spacing:0.35em;color:var(--gold);text-transform:uppercase;font-weight:500;margin-bottom:0.6rem;display:block}
+.cat-name{font-family:'Cinzel',serif;font-size:1.3rem;font-weight:600;color:var(--white);line-height:1.3;margin-bottom:0.5rem}
+.cat-desc{font-size:10px;letter-spacing:0.08em;color:rgba(255,255,255,0.7);line-height:1.7;font-weight:300;margin-bottom:1rem}
+.cat-arrow{width:36px;height:36px;border:1px solid rgba(201,168,76,0.5);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateX(-8px);transition:all 0.4s ease 0.05s}
+.cat-card:hover .cat-arrow{opacity:1;transform:translateX(0)}
+
+#atelier{background:#0d0d0d}
+.atelier-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.product-card{background:var(--card-bg);position:relative;overflow:hidden;cursor:pointer;border:1px solid rgba(255,255,255,0.04);transition:border-color 0.3s}
+.product-card:hover{border-color:rgba(201,168,76,0.2)}
+.product-img-wrap{aspect-ratio:3/4;position:relative;overflow:hidden}
+.product-img-real{position:absolute;inset:0;background-size:cover;background-position:center top;transition:transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94)}
+.product-card:hover .product-img-real{transform:scale(1.06)}
+.product-img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(11,11,11,0.5) 0%,transparent 60%)}
+.product-info{padding:1.3rem 1.2rem 1.5rem}
+.product-category{font-size:8px;letter-spacing:0.35em;color:var(--gold);text-transform:uppercase;margin-bottom:0.4rem;display:block;font-weight:500}
+.product-name{font-family:'Cinzel',serif;font-size:0.9rem;font-weight:600;color:var(--white);line-height:1.4;margin-bottom:0.6rem}
+.product-price{font-size:12px;letter-spacing:0.1em;color:var(--gold);font-weight:500}
+.cart-panel{position:absolute;bottom:0;left:0;right:0;padding:1.1rem 1.2rem;background:rgba(201,168,76,0.95);transform:translateY(100%);transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+.product-card:hover .cart-panel{transform:translateY(0)}
+.cart-panel-text{font-size:9px;letter-spacing:0.3em;color:var(--black);text-transform:uppercase;font-weight:700}
+
+#testimonials{background:var(--black);text-align:center;padding:8rem 3rem}
+.testimonial-wrap{max-width:720px;margin:0 auto}
+.quote-mark{font-family:'Cinzel',serif;font-size:5rem;color:var(--gold);line-height:0.6;margin-bottom:1.5rem;opacity:0.6;display:block}
+.testimonial-slides{position:relative;overflow:hidden;min-height:180px}
+.testimonial-slide{position:absolute;inset:0;opacity:0;transition:opacity 0.8s ease;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.testimonial-slide.active{opacity:1;position:relative}
+.testimonial-text{font-family:'Cinzel',serif;font-size:clamp(1rem,1.5vw,1.2rem);font-weight:400;color:var(--white);line-height:1.8;font-style:italic;margin-bottom:2rem}
+.testimonial-author{font-size:9px;letter-spacing:0.4em;color:var(--gold);text-transform:uppercase;font-weight:500}
+.testimonial-role{font-size:9px;letter-spacing:0.2em;color:var(--gray);margin-top:0.3rem;text-transform:uppercase}
+.dot-nav{display:flex;gap:10px;justify-content:center;margin-top:3rem}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(201,168,76,0.25);cursor:pointer;transition:all 0.3s;border:none}
+.dot.active{background:var(--gold)}
+
+#footer{background:#080808;border-top:1px solid rgba(201,168,76,0.1);padding:6rem 3rem 0}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.4fr;gap:4rem;padding-bottom:5rem;border-bottom:1px solid rgba(255,255,255,0.06)}
+.footer-brand-name{font-family:'Cinzel',serif;font-size:1rem;font-weight:700;letter-spacing:0.35em;color:var(--white);margin-bottom:1rem;margin-top:1rem}
+.footer-tagline{font-size:11px;color:var(--gray);line-height:1.9;font-weight:300;margin-bottom:1.5rem;letter-spacing:0.05em}
+.footer-heading{font-size:9px;letter-spacing:0.4em;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:1.8rem}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:0.9rem}
+.footer-links a{font-size:11px;letter-spacing:0.1em;color:var(--gray);text-decoration:none;transition:color 0.3s;font-weight:300}
+.footer-links a:hover{color:var(--white)}
+.newsletter-label{font-size:10px;letter-spacing:0.15em;color:var(--gray);margin-bottom:1rem;display:block;font-weight:300}
+.newsletter-input{width:100%;background:none;border:none;border-bottom:1px solid rgba(255,255,255,0.15);color:var(--white);font-family:'Montserrat',sans-serif;font-size:12px;padding:8px 0 10px;outline:none;transition:border-color 0.3s;letter-spacing:0.05em}
+.newsletter-input::placeholder{color:rgba(255,255,255,0.25);font-size:11px}
+.newsletter-input:focus{border-bottom-color:var(--gold)}
+.newsletter-submit{margin-top:1.2rem;background:none;border:1px solid rgba(201,168,76,0.4);color:var(--gold);font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;padding:10px 24px;cursor:pointer;transition:all 0.35s;font-weight:500}
+.newsletter-submit:hover{background:var(--gold);color:var(--black);border-color:var(--gold)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding:1.5rem 0}
+.footer-copy{font-size:10px;color:rgba(255,255,255,0.25);letter-spacing:0.1em}
+.footer-socials{display:flex;gap:1.5rem}
+.social-link{font-size:10px;letter-spacing:0.2em;color:rgba(255,255,255,0.3);text-decoration:none;text-transform:uppercase;font-weight:500;transition:color 0.3s}
+.social-link:hover{color:var(--gold)}
+
+.img-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:3rem;color:rgba(201,168,76,0.15);font-weight:700}
+
+@media(max-width:900px){.cat-grid{grid-template-columns:1fr 1fr}.atelier-grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr}.nav-links{display:none}}
+@media(max-width:600px){.cat-grid{grid-template-columns:1fr}.atelier-grid{grid-template-columns:1fr}.section{padding:5rem 1.5rem}#navbar{padding:1rem 1.5rem}}
+</style>
+</head>
+<body>
+<h2 class="sr-only">Valerius luxury fashion e-commerce website with real editorial photography for products and categories</h2>
+
+<nav id="navbar">
+  <a class="logo-wrap" href="#hero">
+    <svg viewBox="0 0 38 38" width="38" height="38" fill="none">
+      <polygon points="19,2 36,19 19,36 2,19" fill="none" stroke="#C9A84C" stroke-width="1.2"/>
+      <text x="19" y="25" text-anchor="middle" font-family="Cinzel,serif" font-size="14" font-weight="700" fill="#C9A84C">V</text>
+    </svg>
+    <div style="display:flex;flex-direction:column;line-height:1">
+      <span class="logo-name">VALERIUS</span>
+      <span class="logo-sub">MAISON DE COUTURE</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#categories">Collections</a></li>
+    <li><a href="#atelier">The Atelier</a></li>
+    <li><a href="#testimonials">Heritage</a></li>
+  </ul>
+  <div class="nav-icons">
+    <button class="nav-icon-btn" aria-label="Search">&#x2315;</button>
+    <button class="nav-icon-btn" aria-label="Cart" style="position:relative" id="cart-btn">
+      &#x25A1;<span class="cart-badge" id="cart-count">0</span>
+    </button>
+    <button class="nav-icon-btn" aria-label="Profile">&#x25CB;</button>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-img"></div>
+  <div class="hero-content">
+    <span class="hero-tag">Haute Couture · Est. 1987</span>
+    <h1>
+      <div class="hero-title-1">Defining Modern<br>Tailoring</div>
+      <div class="hero-title-2">The Art of Sartorial Perfection</div>
+    </h1>
+    <div class="hero-line"></div>
+    <p class="hero-desc">Each Valerius creation is a testament to the unwavering pursuit of perfection — where heritage craft meets the forward edge of contemporary design.</p>
+    <div class="hero-cta-wrap">
+      <button class="btn-gold-outline" onclick="document.getElementById('atelier').scrollIntoView({behavior:'smooth'})">Explore the Atelier</button>
+      <button class="btn-ghost" onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})">View Collections ›</button>
+    </div>
+  </div>
+  <div class="scroll-indicator" onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})">
+    <div class="scroll-line"><div class="scroll-line-inner"></div></div>
+    <span class="scroll-text">Scroll</span>
+  </div>
+</section>
+
+<section id="categories" class="section" style="padding:0">
+  <div class="section-header" style="padding-top:7rem;padding-bottom:4.5rem">
+    <span class="section-eyebrow">Curated for the Discerning</span>
+    <h2 class="section-title">The Collections</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card">
+      <div class="cat-card-bg" style="background-image:url('https://cdn-ilemaeg.nitrocdn.com/cDCOyTPrLIkslGrXPVJnrwonFpExFfqi/assets/images/optimized/rev-179012a/pearcebespoke.com/oak/files/images/men/mens-custom-suits-16.jpg')"></div>
+      <div class="cat-overlay"></div>
+      <div class="cat-content">
+        <span class="cat-label">Men's Collection</span>
+        <div class="cat-name">Bespoke Men's Suits</div>
+        <div class="cat-desc">Pure wool, double-breasted masterworks crafted with unwavering precision</div>
+        <div class="cat-arrow"><span style="color:var(--gold);font-size:16px">→</span></div>
+      </div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-card-bg" style="background-image:url('https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=800&q=85&fit=crop&crop=top')"></div>
+      <div class="cat-overlay"></div>
+      <div class="cat-content">
+        <span class="cat-label">Women's Collection</span>
+        <div class="cat-name">Signature Women's Blazers</div>
+        <div class="cat-desc">Structured shoulders, avant-garde silhouettes and refined power-suits</div>
+        <div class="cat-arrow"><span style="color:var(--gold);font-size:16px">→</span></div>
+      </div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-card-bg" style="background-image:url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=85&fit=crop&crop=top')"></div>
+      <div class="cat-overlay"></div>
+      <div class="cat-content">
+        <span class="cat-label">Formal & Evening</span>
+        <div class="cat-name">Evening Wear</div>
+        <div class="cat-desc">Velvet tuxedos and sharp evening gowns for the exceptional occasion</div>
+        <div class="cat-arrow"><span style="color:var(--gold);font-size:16px">→</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="atelier" class="section">
+  <div class="section-header">
+    <span class="section-eyebrow">Featured Masterpieces</span>
+    <h2 class="section-title">The Atelier</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="atelier-grid">
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <div class="product-img-real" style="background-image:url('https://images.unsplash.com/photo-1617137968427-85924c800a22?w=600&q=85&fit=crop&crop=top')">
+          <div class="img-fallback">V</div>
+        </div>
+        <div class="product-img-overlay"></div>
+      </div>
+      <div class="product-info">
+        <span class="product-category">Men's Tailoring</span>
+        <div class="product-name">Aurelius Double-Breasted Suit</div>
+        <div class="product-price">£ 4,200</div>
+      </div>
+      <div class="cart-panel" onclick="addToCart('Aurelius Double-Breasted Suit')">
+        <span class="cart-panel-text">Add to Atelier Bag</span>
+        <span style="color:var(--black);font-size:18px;font-weight:300">+</span>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <div class="product-img-real" style="background-image:url('https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&q=85&fit=crop&crop=top')">
+          <div class="img-fallback">V</div>
+        </div>
+        <div class="product-img-overlay"></div>
+      </div>
+      <div class="product-info">
+        <span class="product-category">Women's Tailoring</span>
+        <div class="product-name">Valeria Structured Power Blazer</div>
+        <div class="product-price">£ 2,850</div>
+      </div>
+      <div class="cart-panel" onclick="addToCart('Valeria Structured Power Blazer')">
+        <span class="cart-panel-text">Add to Atelier Bag</span>
+        <span style="color:var(--black);font-size:18px;font-weight:300">+</span>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <div class="product-img-real" style="background-image:url('https://studybyjanak.com/cdn/shop/files/ROH_2021.jpg?v=1757315396&width=1080')">
+          <div class="img-fallback">V</div>
+        </div>
+        <div class="product-img-overlay"></div>
+      </div>
+      <div class="product-info">
+        <span class="product-category">Men's Evening</span>
+        <div class="product-name">Midnight Tuxedo Set</div>
+        <div class="product-price">£ 5,600</div>
+      </div>
+      <div class="cart-panel" onclick="addToCart('Midnight Tuxedo Set')">
+        <span class="cart-panel-text">Add to Atelier Bag</span>
+        <span style="color:var(--black);font-size:18px;font-weight:300">+</span>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <div class="product-img-real" style="background-image:url('https://mintlis.com/cdn/shop/files/C5F3CFDF-6631-4E5E-8F3E-3BDC19233B42.png?v=1732310572')">
+          <div class="img-fallback">V</div>
+        </div>
+        <div class="product-img-overlay"></div>
+      </div>
+      <div class="product-info">
+        <span class="product-category">Unisex Tailoring</span>
+        <div class="product-name">Florentine Wool Overcoat</div>
+        <div class="product-price">£ 3,950</div>
+      </div>
+      <div class="cart-panel" onclick="addToCart('Florentine Wool Overcoat')">
+        <span class="cart-panel-text">Add to Atelier Bag</span>
+        <span style="color:var(--black);font-size:18px;font-weight:300">+</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="testimonial-wrap">
+    <span class="section-eyebrow">Heritage Voices</span>
+    <span class="quote-mark">"</span>
+    <div class="testimonial-slides">
+      <div class="testimonial-slide active" id="slide-0">
+        <p class="testimonial-text">To wear Valerius is to understand that clothing can transcend the ordinary. Each suit is not simply tailored — it is composed, like a symphony in wool and silk.</p>
+        <div class="testimonial-author">Lord Edmund Fairfax</div>
+        <div class="testimonial-role">Patron of the Arts · London</div>
+      </div>
+      <div class="testimonial-slide" id="slide-1">
+        <p class="testimonial-text">I have walked into boardrooms and premiere stages alike wearing Valerius. The reaction is always the same: an unmistakable acknowledgment of authority and grace.</p>
+        <div class="testimonial-author">Isabelle de Montclair</div>
+        <div class="testimonial-role">Executive Director · Paris</div>
+      </div>
+      <div class="testimonial-slide" id="slide-2">
+        <p class="testimonial-text">The Florentine Overcoat became more than a garment — it became part of my identity. Valerius understands the intimate relationship between clothing and character.</p>
+        <div class="testimonial-author">Nikhil Arora</div>
+        <div class="testimonial-role">Collector & Philanthropist · Mumbai</div>
+      </div>
+    </div>
+    <div class="dot-nav">
+      <button class="dot active" onclick="goToSlide(0)" aria-label="Testimonial 1"></button>
+      <button class="dot" onclick="goToSlide(1)" aria-label="Testimonial 2"></button>
+      <button class="dot" onclick="goToSlide(2)" aria-label="Testimonial 3"></button>
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="footer-grid">
+    <div>
+      <svg viewBox="0 0 32 32" width="32" height="32" fill="none" style="opacity:0.6">
+        <polygon points="16,1 31,16 16,31 1,16" stroke="#C9A84C" stroke-width="1.2"/>
+        <text x="16" y="21" text-anchor="middle" font-family="Cinzel,serif" font-size="13" font-weight="700" fill="#C9A84C">V</text>
+      </svg>
+      <div class="footer-brand-name">VALERIUS</div>
+      <p class="footer-tagline">A maison built upon the belief that true luxury is born from uncompromising craft, singular vision, and the courage to define rather than follow.</p>
+    </div>
+    <div>
+      <div class="footer-heading">Collections</div>
+      <ul class="footer-links">
+        <li><a href="#">Bespoke Men's Suits</a></li>
+        <li><a href="#">Women's Blazers</a></li>
+        <li><a href="#">Evening Wear</a></li>
+        <li><a href="#">Overcoats & Outerwear</a></li>
+        <li><a href="#">Archive Editions</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">The Atelier</div>
+      <ul class="footer-links">
+        <li><a href="#">Request an Appointment</a></li>
+        <li><a href="#">Bespoke Consultation</a></li>
+        <li><a href="#">Garment Care Guide</a></li>
+        <li><a href="#">Corporate & Events</a></li>
+        <li><a href="#">Alterations Service</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">The Journal</div>
+      <p class="newsletter-label">Dispatches from the world of Valerius — editorials, exclusive previews, and private invitations.</p>
+      <input type="email" class="newsletter-input" placeholder="Your email address" aria-label="Newsletter email"/>
+      <button class="newsletter-submit">Subscribe</button>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Valerius Maison de Couture. All rights reserved.</span>
+    <div class="footer-socials">
+      <a href="#" class="social-link">Instagram</a>
+      <a href="#" class="social-link">Pinterest</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',function(){
+  var nb=document.getElementById('navbar');
+  if(window.scrollY>60){nb.classList.add('scrolled')}else{nb.classList.remove('scrolled')}
+},{passive:true});
+
+var cartCount=0;
+function addToCart(name){
+  cartCount++;
+  document.getElementById('cart-count').textContent=cartCount;
+  var btn=document.getElementById('cart-btn');
+  btn.style.color='#C9A84C';
+  setTimeout(function(){btn.style.color=''},700);
+}
+
+var currentSlide=0;
+function goToSlide(n){
+  document.getElementById('slide-'+currentSlide).classList.remove('active');
+  document.querySelectorAll('.dot')[currentSlide].classList.remove('active');
+  currentSlide=n;
+  document.getElementById('slide-'+currentSlide).classList.add('active');
+  document.querySelectorAll('.dot')[currentSlide].classList.add('active');
+}
+setInterval(function(){goToSlide((currentSlide+1)%3)},5000);
+
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var t=document.querySelector(this.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}
+  });
+});
+</script>
+</body>
+</html>
