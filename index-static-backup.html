@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valerius — Defining Modern Tailoring</title>
+  <meta name="description" content="Valerius — The Art of Sartorial Perfection. Bespoke tailoring and luxury fashion.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Sticky Interactive Navbar -->
+  <header class="navbar" id="navbar" role="banner">
+    <a href="#home" class="navbar__logo" aria-label="Valerius Home">
+      <svg class="logo-emblem" viewBox="0 0 48 48" aria-hidden="true">
+        <polygon class="logo-diamond" points="24,4 44,24 24,44 4,24" fill="none" stroke="currentColor" stroke-width="1"/>
+        <text x="24" y="30" text-anchor="middle" class="logo-v">V</text>
+      </svg>
+      <span class="logo-wordmark">VALERIUS</span>
+    </a>
+
+    <nav class="navbar__nav" aria-label="Main navigation">
+      <ul class="navbar__links">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#collections" class="nav-link">Collections</a></li>
+        <li><a href="#atelier" class="nav-link">The Atelier</a></li>
+        <li><a href="#heritage" class="nav-link">Heritage</a></li>
+      </ul>
+    </nav>
+
+    <div class="navbar__utilities">
+      <button type="button" class="utility-btn" aria-label="Search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="11" cy="11" r="7"/><path d="M20 20L16 16"/>
+        </svg>
+      </button>
+      <button type="button" class="utility-btn cart-btn" aria-label="Shopping cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M6 6h15l-1.5 9H7.5L6 6z"/><path d="M6 6L5 3H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/>
+        </svg>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+      <button type="button" class="utility-btn" aria-label="Profile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.5-7 8-7s8 3 8 7"/>
+        </svg>
+      </button>
+      <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="home" aria-label="Hero">
+      <div class="hero__bg">
+        <img src="https://images.unsplash.com/photo-1469334031218-e042a68e7b93?w=1920&q=80" alt="" class="hero__img" loading="eager">
+        <div class="hero__overlay"></div>
+      </div>
+      <div class="hero__content">
+        <p class="hero__line hero__line--1">Defining Modern Tailoring</p>
+        <h1 class="hero__line hero__line--2">The Art of Sartorial Perfection</h1>
+        <a href="#collections" class="hero__cta">Explore Collections</a>
+      </div>
+      <div class="scroll-indicator" aria-hidden="true">
+        <span class="scroll-indicator__line"></span>
+        <span class="scroll-indicator__text">Scroll</span>
+      </div>
+    </section>
+
+    <!-- Curated Categories -->
+    <section class="categories" id="collections" aria-labelledby="categories-heading">
+      <div class="section-header">
+        <span class="section-eyebrow">Curated</span>
+        <h2 id="categories-heading" class="section-title">Collections</h2>
+      </div>
+      <div class="categories__grid">
+        <article class="category-card">
+          <div class="category-card__media">
+            <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800&q=80" alt="Bespoke men's tailoring">
+            <div class="category-card__overlay"></div>
+          </div>
+          <div class="category-card__content">
+            <h3 class="category-card__title">Bespoke Men's Suits</h3>
+            <p class="category-card__desc">Pure wool, double-breasted masterworks</p>
+            <span class="category-card__arrow" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M5 12h14M13 6l6 6-6 6"/>
+              </svg>
+            </span>
+          </div>
+        </article>
+        <article class="category-card">
+          <div class="category-card__media">
+            <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&q=80" alt="Signature women's blazers">
+            <div class="category-card__overlay"></div>
+          </div>
+          <div class="category-card__content">
+            <h3 class="category-card__title">Signature Women's Blazers</h3>
+            <p class="category-card__desc">Structured shoulders, avant-garde silhouettes, power-suits</p>
+            <span class="category-card__arrow" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M5 12h14M13 6l6 6-6 6"/>
+              </svg>
+            </span>
+          </div>
+        </article>
+        <article class="category-card">
+          <div class="category-card__media">
+            <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=800&q=80" alt="Evening wear collection">
+            <div class="category-card__overlay"></div>
+          </div>
+          <div class="category-card__content">
+            <h3 class="category-card__title">Evening Wear</h3>
+            <p class="category-card__desc">Velvet tuxedos and sharp evening gowns</p>
+            <span class="category-card__arrow" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M5 12h14M13 6l6 6-6 6"/>
+              </svg>
+            </span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Editorial Lookbook -->
+    <section class="editorial" id="lookbook" aria-labelledby="editorial-heading">
+      <div class="section-header section-header--center">
+        <span class="section-eyebrow">The Valerius Edit</span>
+        <h2 id="editorial-heading" class="section-title">Editorial Lookbook</h2>
+      </div>
+      <div class="editorial__mosaic">
+        <figure class="editorial__item editorial__item--tall">
+          <img src="https://images.unsplash.com/photo-1558171813-4c088753af8f?w=900&q=80" alt="Editorial tailoring portrait">
+          <figcaption class="editorial__caption">Autumn / Winter</figcaption>
+        </figure>
+        <figure class="editorial__item">
+          <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=700&q=80" alt="Structured blazer editorial">
+          <figcaption class="editorial__caption">Power Silhouettes</figcaption>
+        </figure>
+        <figure class="editorial__item">
+          <img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=700&q=80" alt="Evening gown editorial">
+          <figcaption class="editorial__caption">Evening Light</figcaption>
+        </figure>
+        <figure class="editorial__item editorial__item--wide">
+          <img src="https://img.magnific.com/free-photo/pretty-blonde-woman-with-wavy-hair-dressed-skirt-light-blouse-white-jacket-sits-chair_197531-33594.jpg?semt=ais_hybrid&w=740&q=80" alt="Luxury fashion street editorial">
+          <figcaption class="editorial__caption">Urban Elegance</figcaption>
+        </figure>
+        <figure class="editorial__item">
+          <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?w=700&q=80" alt="Men's bespoke suit detail">
+          <figcaption class="editorial__caption">The Craft</figcaption>
+        </figure>
+        <figure class="editorial__item editorial__item--tall">
+          <img src="https://www.obviousmag.com/wp-content/uploads/2025/11/avant-garde.jpg" alt="High-fashion draping editorial">
+          <figcaption class="editorial__caption">Sartorial Drama</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Product Grid — The Atelier -->
+    <section class="atelier" id="atelier" aria-labelledby="atelier-heading">
+      <div class="section-header">
+        <span class="section-eyebrow">Masterpieces</span>
+        <h2 id="atelier-heading" class="section-title">The Atelier</h2>
+      </div>
+      <div class="products__grid">
+        <article class="product-card" data-product="Aurelius Double-Breasted Suit">
+          <div class="product-card__image-wrap">
+            <img src="https://images.opumo.com/wordpress/wp-content/uploads/2024/10/Layer-15-4-989x1200.png" alt="Aurelius Double-Breasted Suit">
+            <div class="product-card__hover">
+              <button type="button" class="product-card__add add-to-cart">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-card__info">
+            <span class="product-card__category">Men's</span>
+            <h3 class="product-card__name">Aurelius Double-Breasted Suit</h3>
+            <p class="product-card__price">$4,850</p>
+          </div>
+        </article>
+        <article class="product-card" data-product="Valeria Structured Power Blazer">
+          <div class="product-card__image-wrap">
+            <img src="https://lh5.googleusercontent.com/proxy/MJZPJfOxEo1jyqfiWyV1dFA7EmO6aIp91i-JKiMNFUU1nebybF6PZagZKfW-CT4Mdk708ckUrTUfBT14aMuThOR1WcajwZvtnlFmHDfWhr9G_-6xCyaSMnRIxy4o6Hnf91PxY8-sSqiIRQMhqeg" alt="Valeria Structured Power Blazer">
+            <div class="product-card__hover">
+              <button type="button" class="product-card__add add-to-cart">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-card__info">
+            <span class="product-card__category">Women's</span>
+            <h3 class="product-card__name">Valeria Structured Power Blazer</h3>
+            <p class="product-card__price">$2,420</p>
+          </div>
+        </article>
+        <article class="product-card" data-product="Midnight Tuxedo Set">
+          <div class="product-card__image-wrap">
+            <img src="https://vardo.co.in/cdn/shop/files/Untitleddesign-2025-07-28T154155.431.png?v=1753698200" alt="Midnight Tuxedo Set">
+            <div class="product-card__hover">
+              <button type="button" class="product-card__add add-to-cart">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-card__info">
+            <span class="product-card__category">Men's</span>
+            <h3 class="product-card__name">Midnight Tuxedo Set</h3>
+            <p class="product-card__price">$3,680</p>
+          </div>
+        </article>
+        <article class="product-card" data-product="Florentine Wool Overcoat">
+          <div class="product-card__image-wrap">
+            <img src="https://files.azoo.co/generate/68/1600/22519008-817_767x1105_crop_center-2x-(1).webp" alt="Florentine Wool Overcoat">
+            <div class="product-card__hover">
+              <button type="button" class="product-card__add add-to-cart">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-card__info">
+            <span class="product-card__category">Women's / Unisex</span>
+            <h3 class="product-card__name">Florentine Wool Overcoat</h3>
+            <p class="product-card__price">$3,150</p>
+          </div>
+        </article>
+        <article class="product-card" data-product="Cesare Silk Dinner Jacket">
+          <div class="product-card__image-wrap">
+            <img src="https://i.pinimg.com/736x/88/d7/b9/88d7b9c12d9648f1973d44e62ad4faaf.jpg" alt="Cesare Silk Dinner Jacket">
+            <div class="product-card__hover">
+              <button type="button" class="product-card__add add-to-cart">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-card__info">
+            <span class="product-card__category">Men's</span>
+            <h3 class="product-card__name">Cesare Silk Dinner Jacket</h3>
+            <p class="product-card__price">$2,980</p>
+          </div>
+        </article>
+        <article class="product-card" data-product="Nocturne Evening Gown">
+          <div class="product-card__image-wrap">
+            <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=600&q=80" alt="Nocturne Evening Gown">
+            <div class="product-card__hover">
+              <button type="button" class="product-card__add add-to-cart">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-card__info">
+            <span class="product-card__category">Women's</span>
+            <h3 class="product-card__name">Nocturne Evening Gown</h3>
+            <p class="product-card__price">$5,200</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- In Stock Gallery -->
+    <section class="in-stock" id="in-stock" aria-labelledby="instock-heading">
+      <div class="section-header section-header--center">
+        <span class="section-eyebrow">Available Now</span>
+        <h2 id="instock-heading" class="section-title">In Stock</h2>
+      </div>
+      <div class="in-stock__grid">
+        <figure class="in-stock__item">
+          <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&q=80" alt="Charcoal wool blazer in stock">
+          <figcaption>Charcoal Wool Blazer</figcaption>
+        </figure>
+        <figure class="in-stock__item">
+          <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?w=600&q=80" alt="Navy three-piece suit in stock">
+          <figcaption>Navy Three-Piece Suit</figcaption>
+        </figure>
+        <figure class="in-stock__item">
+          <img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=600&q=80" alt="Silk evening dress in stock">
+          <figcaption>Silk Evening Dress</figcaption>
+        </figure>
+        <figure class="in-stock__item">
+          <img src="https://m.media-amazon.com/images/I/71NuLgJW4BL._AC_UY1100_.jpg" alt="Slim-fit tuxedo in stock">
+          <figcaption>Slim-Fit Tuxedo</figcaption>
+        </figure>
+        <figure class="in-stock__item">
+          <img src="https://i.pinimg.com/736x/8c/77/f7/8c77f7a1dc18e517b480a0ae22f1a182.jpg" alt="Camel cashmere overcoat in stock">
+          <figcaption>Camel Cashmere Overcoat</figcaption>
+        </figure>
+        <figure class="in-stock__item">
+          <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&q=80" alt="Structured power blazer in stock">
+          <figcaption>Structured Power Blazer</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Heritage Testimonials -->
+    <section class="heritage" id="heritage" aria-labelledby="heritage-heading">
+      <div class="section-header section-header--center">
+        <span class="section-eyebrow">Heritage</span>
+        <h2 id="heritage-heading" class="section-title">Voices of Distinction</h2>
+      </div>
+      <div class="testimonial-carousel" id="testimonialCarousel">
+        <div class="testimonial-carousel__track" id="testimonialTrack">
+          <blockquote class="testimonial-slide active">
+            <span class="testimonial-quote" aria-hidden="true">"</span>
+            <p class="testimonial-text">Valerius doesn't merely dress you—it defines your presence. Every stitch is a declaration of intent.</p>
+            <footer class="testimonial-author">
+              <cite>— Alexandra V., Creative Director</cite>
+            </footer>
+          </blockquote>
+          <blockquote class="testimonial-slide">
+            <span class="testimonial-quote" aria-hidden="true">"</span>
+            <p class="testimonial-text">The atelier experience is unparalleled. From the first fitting to the final reveal, pure sartorial poetry.</p>
+            <footer class="testimonial-author">
+              <cite>— Marcus Chen, Managing Partner</cite>
+            </footer>
+          </blockquote>
+          <blockquote class="testimonial-slide">
+            <span class="testimonial-quote" aria-hidden="true">"</span>
+            <p class="testimonial-text">I've worn Savile Row. I've worn Milan. Nothing compares to the quiet confidence of a Valerius silhouette.</p>
+            <footer class="testimonial-author">
+              <cite>— Isabella Laurent, Editor-at-Large</cite>
+            </footer>
+          </blockquote>
+        </div>
+        <div class="testimonial-dots" id="testimonialDots" role="tablist" aria-label="Testimonial navigation"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Editorial Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__grid">
+      <div class="footer__col footer__brand">
+        <a href="#home" class="footer__logo" aria-label="Valerius">
+          <svg class="logo-emblem logo-emblem--footer" viewBox="0 0 48 48" aria-hidden="true">
+            <polygon class="logo-diamond" points="24,4 44,24 24,44 4,24" fill="none" stroke="currentColor" stroke-width="1"/>
+            <text x="24" y="30" text-anchor="middle" class="logo-v">V</text>
+          </svg>
+        </a>
+        <p class="footer__philosophy">Since 1892, Valerius has pursued a singular vision: garments that transcend fashion and become legacy. Crafted in silence. Worn with purpose.</p>
+      </div>
+      <div class="footer__col">
+        <h4 class="footer__heading">Collections</h4>
+        <ul class="footer__links">
+          <li><a href="#collections">Men's Bespoke</a></li>
+          <li><a href="#collections">Women's Tailoring</a></li>
+          <li><a href="#collections">Evening Wear</a></li>
+          <li><a href="#atelier">The Atelier</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4 class="footer__heading">Atelier Services</h4>
+        <ul class="footer__links">
+          <li><a href="#">Private Appointments</a></li>
+          <li><a href="#">Bespoke Consultations</a></li>
+          <li><a href="#">Garment Care Guide</a></li>
+          <li><a href="#">Alterations</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4 class="footer__heading">The Journal</h4>
+        <p class="footer__newsletter-desc">Receive editorial insights and exclusive previews.</p>
+        <form class="newsletter-form" id="newsletterForm" aria-label="Newsletter signup">
+          <label for="newsletterEmail" class="visually-hidden">Email address</label>
+          <input type="email" id="newsletterEmail" name="email" placeholder="Your email" required autocomplete="email">
+          <button type="submit" class="newsletter-submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer__bar">
+      <p class="footer__copyright">&copy; 2026 Valerius. All rights reserved.</p>
+      <div class="footer__social">
+        <a href="#" class="social-link" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r="1" fill="currentColor"/>
+          </svg>
+        </a>
+        <a href="#" class="social-link" aria-label="Pinterest">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.87 7.83 6.76 9.12-.09-.79-.17-2 .04-2.86.18-.77 1.17-4.91 1.17-4.91s-.3-.6-.3-1.49c0-1.39.81-2.43 1.81-2.43.86 0 1.27.64 1.27 1.41 0 .86-.55 2.15-.83 3.35-.24 1 .5 1.82 1.48 1.82 1.78 0 3.15-1.88 3.15-4.59 0-2.4-1.72-4.08-4.18-4.08-2.85 0-4.52 2.13-4.52 4.33 0 .86.33 1.78.74 2.28a.3.3 0 01-.07.29l-.27 1.05c-.04.17-.13.21-.3.13-1.12-.52-1.82-2.15-1.82-3.47 0-2.83 2.06-5.43 5.94-5.43 3.12 0 5.54 2.22 5.54 5.19 0 3.1-1.95 5.59-4.66 5.59-.91 0-1.77-.47-2.06-1.03l-.56 2.14c-.2.78-.75 1.75-1.12 2.35.84.26 1.73.4 2.65.4 5.52 0 10-4.48 10-10S17.52 2 12 2z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
